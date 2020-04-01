@@ -1,11 +1,9 @@
-#include <iostream>
 #include <fstream>
 #include <string>
 #include "DynPointStack_Modified.h"
 
 using namespace std;
-//Mehmet Akif Gultekin:: 25458 :: mehmetgultekin@sabanciuniv.edu
-
+//mehmetgultekin@sabanciuniv.edu
 
 ostream & operator <<(ostream & os, DynIntStack &Stack){ //this function prints Stack while empting it.
 
@@ -41,7 +39,6 @@ DynIntStack Compare (DynIntStack &Stack,DynIntStack &Stack2,int rowNumber,int Co
 	}
 	if( Stack_temp.top==NULL) return Stack;
 	else if(Stack_temp2.top==NULL) return Stack2;
-	else cout<< "Error Code: 2.";					//here to see if there is any error about debugging 
 }
 DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int columnNumber){ //these function is main maze solver, every parting of the ways seems like new maze and recursion happens.
 	StackNode* Node=new StackNode(Array[row][column]);
@@ -73,7 +70,7 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 				Array[row][column].value=1; //closes the gate to old road
 				Stack<<Array[row][column];   //gets the step in a new stack
 				column=column+1;				//goes rigth
-				 
+
 			}
 			if (down){
 				Array[row][column].value=1;  //closes the gate to old road
@@ -90,7 +87,7 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 		else if(count==2||count==3||count==4)		//if there is a fork(more than one way to go)
 		{
 			DynIntStack Stackup,Stackdown,Stackrigth,Stackleft,StR_temp,StD_temp,StU_temp,StL_temp;
-			
+
 
 			Stack<<Array[row][column];//step is taken in a stack just once.
 			//try every road and decide which one is shortest?
@@ -140,7 +137,7 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 		}
 
 		else {
-				Stack<<Array[row][column]; 
+			Stack<<Array[row][column]; 
 		}
 	}
 	static DynIntStack* Stack_temp;
@@ -174,54 +171,56 @@ int main(){
 	string filename;
 	int column,row;
 	int Xenter,Yenter;
-	cout<<"Welcome to the homework \"A Great Day for Freedom\"."<<endl;
-	cout<<"Please enter a file name for the maze: ";
-	cin>>filename;				//filename taken
-	ifstream file;				
-	file.open(filename.c_str());	//opened file
-
-	if(file.is_open()==false){   //exits if file is not found
-		cout<<"File name is incorrect. Program exiting..."<<endl;
-	}
-	else if(file.is_open()==true){  
-		//generates two d. array and takes points
-		file.seekg(0);
-		file>>column;
-		file>>row;
-		file>>Xenter;
-		file>>Yenter;
-		Stack<<Point(Xenter,Yenter,0); //includes first step of the maze, to main stack,
-		int a;
-		Point** twoDarray=new Point*[row];
-		for(int r=0;r<row;r++){
-			twoDarray[r]= new Point[column];
-			for(int c=0;c<column;c++){
-				file>>a;				//takes all integers and generates the stack 
-				Point point(c,r,a);
-				twoDarray[r][c]=point;	
-			}
+	filename="maze" ;
+	ifstream file;	
+	fstream result;
+	result.open("results", ios::out);
+	try{
+		file.open(filename.c_str());	//opened file
+		if(file.is_open()==false){   //exits if file is not found
+			throw "error";
 		}
-		file.close();
-		twoDarray[Yenter][Xenter].value=1;		//closes the door as beginning of the maze for player
-		if(Xenter==0)Xenter=1; if(Xenter==column-1)Xenter-=1;;if( Yenter==0)Yenter+=1; if(Yenter==row-1)Yenter-=1; //first walk
-
-		Stack+=MazeRunner(twoDarray,Yenter,Xenter,row,column); //maze running starts
-		
-		DynIntStack Result;
-		Point point;
-		int count=0;
-			while(Stack.top!=NULL )			//result is the upside down version, i need it since my stack begins with end of the maze
-			{
-				count++;				//counts how much steps in maze
-				Stack>>point;
-				Result<<point;
-			}
-			cout<<"Printing the shortest exit path, with the length of "<<count<<endl;
-			for(int i=0;i<=count;i++){
-			//prints the result stack which is shortest solution
-				cout<<Result;
-			}
-			delete2Darray(twoDarray,row,column); //deletes created two d. array.
 	}
+	catch(string str){
+		return 0;
+	} 
+	//generates two d. array and takes points
+	file.seekg(0);
+	file>>column;
+	file>>row;
+	file>>Xenter;
+	file>>Yenter;
+	Stack<<Point(Xenter,Yenter,0); //includes first step of the maze, to main stack,
+	int a;
+	Point** twoDarray=new Point*[row];
+	for(int r=0;r<row;r++){
+		twoDarray[r]= new Point[column];
+		for(int c=0;c<column;c++){
+			file>>a;				//takes all integers and generates the stack 
+			Point point(c,r,a);
+			twoDarray[r][c]=point;	
+		}
+	}
+	file.close();
+	twoDarray[Yenter][Xenter].value=1;		//closes the door as beginning of the maze for player
+	if(Xenter==0)Xenter=1; if(Xenter==column-1)Xenter-=1;;if( Yenter==0)Yenter+=1; if(Yenter==row-1)Yenter-=1; //first walk
+
+	Stack+=MazeRunner(twoDarray,Yenter,Xenter,row,column); //maze running starts
+
+	DynIntStack Result;
+	Point point;
+	int count=0;
+	while(Stack.top!=NULL )			//result is the upside down version, i need it since my stack begins with end of the maze
+	{
+		count++;				//counts how much steps in maze
+		Stack>>point;
+		Result<<point;
+	}
+	result<<count<<endl;
+	for(int i=0;i<=count;i++){
+		//prints the result stack which is shortest solution
+		result<<Result;
+	}
+	delete2Darray(twoDarray,row,column); //deletes created two d. array.
 	return 0;
 }
