@@ -75,7 +75,7 @@ $(document).ready(function () {
         //creating maze screen
         $(".dialog").fadeIn("4000");
         $(".dialog").append("<div>Your maze is in process.</div>")
-        $(".dialog").append('<img class="loading" src="loading-opaque.gif">')
+        $(".dialog").append('<img class="loading" src="loading-opaque.png">')
         $(".dialog").css("z-index","1");
         $(".dialog").css("display","box");
 
@@ -83,9 +83,9 @@ $(document).ready(function () {
 
         myMaze.startingX= Math.floor(pointed/100) ;
         myMaze.startingY= pointed%100 ;
-        while(id<10000){
-            if($(`#${id}`).css( "background-color" ) == "rgba(235, 235, 235, 0.8)") myMaze.ints.push(0);
-            else myMaze.ints.push(1);
+        while(id<1600){
+            if($(`#${id}`).css( "background-color" ) == "rgba(235, 235, 235, 0.8)") myMaze.ints.push(1);
+            else myMaze.ints.push(0);
         id++;
         }
  
@@ -137,7 +137,7 @@ $(document).ready(function () {
     })
 
     i = 0;
-    while (i < 10000) { $('.main').append(`<button id=${i} class="child"></button>`); i = i + 1; }
+    while (i < 1600) { $('.main').append(`<button id=${i} class="child"></button>`); i = i + 1; }
 
     $('.child').mouseenter(function (e) {
         let id = e.target.id;

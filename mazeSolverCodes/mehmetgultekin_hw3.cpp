@@ -2,8 +2,11 @@
 #include <string>
 #include "DynPointStack_Modified.h"
 
+static int MAINCOUNTER=0;
+
 using namespace std;
 //mehmetgultekin@sabanciuniv.edu
+
 
 ostream & operator <<(ostream & os, DynIntStack &Stack){ //this function prints Stack while empting it.
 
@@ -21,27 +24,31 @@ DynIntStack Compare (DynIntStack &Stack,DynIntStack &Stack2,int rowNumber,int Co
 	//this function Compare's two stack's length and returns the short one.
 	Point num,num2;
 	static DynIntStack Stack_temp;				//used static the prevent probable errors of deleted stacks.
-	if(Stack.top==NULL)Stack_temp.top=NULL;		//equals the main and static stacks.
+	if(Stack.top==nullptr)Stack_temp.top=nullptr;		//equals the main and static stacks.
 	else Stack_temp=Stack;
 	static DynIntStack Stack_temp2;
-	if(Stack2.top==NULL)Stack_temp2.top=NULL; 
+	if(Stack2.top==nullptr)Stack_temp2.top=nullptr; 
 	else Stack_temp2=Stack2;
-	if (Stack.top==NULL)return Stack2;			//one of the stacks is already empty -> return other one  
-	if (Stack2.top==NULL)return Stack;
+	if (Stack.top==nullptr)return Stack2;			//one of the stacks is already empty -> return other one  
+	if (Stack2.top==nullptr)return Stack;
 	Stack_temp>>num;
 	Stack_temp2>>num2;
 	if (num.x!=0 && num.x!=ColumnNumber-1 && num.y!=0 && num.y!=rowNumber-1)    return Stack2; //if it s not an end, return other one.
 	if (num2.x!=0 && num2.x!=ColumnNumber-1 && num2.y!=0 && num2.y!=rowNumber-1) return Stack;
-	while((Stack_temp.top!=NULL && Stack_temp2.top!=NULL) && !(Stack_temp.top->value.x==0 && Stack_temp.top->value.value==0 && Stack_temp.top->value.y==0  ))
+	while((Stack_temp.top!=nullptr && Stack_temp2.top!=nullptr) && !(Stack_temp.top->value.x==0 && Stack_temp.top->value.value==0 && Stack_temp.top->value.y==0  ))
 	{//means until empty.
 		Stack_temp>>num;
 		Stack_temp2>>num;
 	}
-	if( Stack_temp.top==NULL) return Stack;
-	else if(Stack_temp2.top==NULL) return Stack2;
+	if( Stack_temp.top==nullptr) return Stack;
+	else if(Stack_temp2.top==nullptr) return Stack2;
 }
+
 DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int columnNumber){ //these function is main maze solver, every parting of the ways seems like new maze and recursion happens.
-	StackNode* Node=new StackNode(Array[row][column]);
+	MAINCOUNTER++;
+	cout<<MAINCOUNTER;
+	if(MAINCOUNTER%30==0)
+		cout<<"debug";
 	DynIntStack Stack;  //generates new satck to watch the new maze , every road is a new one.
 	int count=1;  
 
@@ -122,11 +129,11 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 			//which one is shortest?
 			DynIntStack Stack1,Stack2;
 
-			if (Stackdown.top!=NULL ||Stackup.top!=NULL) Stack1=Compare(Stackdown,Stackup,rowNumber,columnNumber); //dont get in to "compare" if both of them are empty.
-			else Stack1.top=NULL;															//-- andjust say result = empty.
+			if (Stackdown.top!=nullptr ||Stackup.top!=nullptr) Stack1=Compare(Stackdown,Stackup,rowNumber,columnNumber); //dont get in to "compare" if both of them are empty.
+			else Stack1.top=nullptr;															//-- andjust say result = empty.
 			/**************************************/
-			if (Stackrigth.top!=NULL ||Stackleft.top!=NULL) Stack2=	Compare(Stackleft,Stackrigth,rowNumber,columnNumber);
-			else Stack2.top=NULL;
+			if (Stackrigth.top!=nullptr ||Stackleft.top!=nullptr) Stack2=	Compare(Stackleft,Stackrigth,rowNumber,columnNumber);
+			else Stack2.top=nullptr;
 			/*************************************/
 			DynIntStack Stack3= Compare(Stack1,Stack2,rowNumber,columnNumber); //stack3=shortest of the roads
 			Point num;
@@ -159,14 +166,15 @@ void delete2Darray(Point** &Matrix,int row,int column){
 			b++;
 		}
 		delete[] Matrix[a];				//destructs point' pointers
-		Matrix[a]=NULL;
+		Matrix[a]=nullptr;
 		a++;
 	}
 	delete[] Matrix;			//deletes remaining (main pointer (which points to the point pointers))
-	Matrix=NULL;
+	Matrix=nullptr;
 }
 
 int main(){
+
 	DynIntStack Stack;
 	string filename;
 	int column,row;
@@ -174,7 +182,7 @@ int main(){
 	filename="maze" ;
 	ifstream file;	
 	fstream result;
-	result.open("results", ios::out);
+	result.open("results");
 	try{
 		file.open(filename.c_str());	//opened file
 		if(file.is_open()==false){   //exits if file is not found
@@ -210,7 +218,7 @@ int main(){
 	DynIntStack Result;
 	Point point;
 	int count=0;
-	while(Stack.top!=NULL )			//result is the upside down version, i need it since my stack begins with end of the maze
+	while(Stack.top!=nullptr )			//result is the upside down version, i need it since my stack begins with end of the maze
 	{
 		count++;				//counts how much steps in maze
 		Stack>>point;

@@ -20,12 +20,12 @@ Point::Point(int m,int n,int v)
 
 StackNode::StackNode()
 {
-	next=NULL;
+	next=nullptr;
 }
 
 StackNode::StackNode(Point val){
 	value=val;
-	next=NULL;
+	next=nullptr;
 }
 
 
@@ -33,7 +33,7 @@ StackNode::StackNode(int m, int n,int v)
 {
 	Point val(m,n,v);
 	value=val;
-	next=NULL;
+	next=nullptr;
 }	
 
 StackNode::StackNode(int m, int n,int v, StackNode* Nodeptr){
@@ -48,7 +48,7 @@ StackNode &StackNode::operator=(StackNode Std){
 	StackNode* newStd_temp2;
 	newStd_temp->next=newStd_temp2;
 	newStd_temp=newStd_temp->next;
-	while(Std.next!=NULL){
+	while(Std.next!=nullptr){
 		Std=*Std.next;
 		StackNode* newStdptr=new StackNode(Std.value.x,Std.value.y,Std.value.value); 
 		newStd_temp->next=newStdptr;
@@ -62,17 +62,17 @@ StackNode &StackNode::operator=(StackNode Std){
 StackNode::~StackNode()
 {
 	//StackNode* NewNode;
-	//if( next!=NULL)next=NewNode;
-	if(this!=NULL){
+	//if( next!=nullptr)next=NewNode;
+	if(this!=nullptr){
 	value.~Point();
-	if( next!=NULL)next=NULL;
+	if( next!=nullptr)next=nullptr;
 	}
 	}
 
 
 
 DynIntStack::DynIntStack(void){
-	top = NULL;
+	top = nullptr;
 }
 
 DynIntStack::DynIntStack(Point& point,StackNode *Node){
@@ -80,11 +80,11 @@ DynIntStack::DynIntStack(Point& point,StackNode *Node){
 	top->value=point;
 }
 DynIntStack::DynIntStack(StackNode *Node){
-	if(Node!=NULL) top=Node;
+	if(Node!=nullptr) top=Node;
 }
 
 DynIntStack::DynIntStack(const DynIntStack & St){
-	if(St.top==NULL){
+	if(St.top==nullptr){
 		DynIntStack New;
 		*this=New;
 	}
@@ -95,7 +95,7 @@ DynIntStack::DynIntStack(const DynIntStack & St){
 		StackNode* ptr=St.top;
 
 		ptr=ptr->next;
-		while (ptr!=NULL)
+		while (ptr!=nullptr)
 		{
 			copyPtr=new StackNode(ptr->value.x,ptr->value.y,ptr->value.value);
 			copyPrev->next=copyPtr;
@@ -112,11 +112,11 @@ DynIntStack::DynIntStack(const DynIntStack & St){
 
 DynIntStack::~DynIntStack(){
 	StackNode* NewNode=top;
-	while (top!=NULL)
+	while (top!=nullptr)
 	{
 		
-		if(top->next!=NULL) NewNode=(top->next);
-		else { top=NULL;NewNode=NULL;}
+		if(top->next!=nullptr) NewNode=(top->next);
+		else { top=nullptr;NewNode=nullptr;}
 		top->~StackNode();
 		top=NewNode;
 		
@@ -128,16 +128,16 @@ DynIntStack::~DynIntStack(){
 DynIntStack & DynIntStack::operator >> (Point & point){
 
 
-	if (top==NULL){
+	if (top==nullptr){
 		cout << "The stack is empty.\n";
 	}
 	else{
 		StackNode *temp=new StackNode(*top);
 		point=temp->value;
-		if(top!=NULL) {temp = top->next;}
-		else if(top->next==NULL)temp=NULL;
+		if(top!=nullptr) {temp = top->next;}
+		else if(top->next==nullptr)temp=nullptr;
 		//delete top;
-		//if((temp!=NULL)&&!(top->value.x==0 && top->value.value==0 && top->value.y==0)){
+		//if((temp!=nullptr)&&!(top->value.x==0 && top->value.value==0 && top->value.y==0)){
 			top = temp;
 
 	}
@@ -148,9 +148,9 @@ DynIntStack & DynIntStack::operator <<(Point point){
 	// Allocate a new node & store Num
 
 	// If there are no nodes in the list make newNode the firstnode
-	if (top==NULL){
+	if (top==nullptr){
 		top = newNode;
-		newNode->next=NULL;
+		newNode->next=nullptr;
 	}
 	else{
 		// Otherwise, insert NewNode before top
@@ -186,7 +186,7 @@ DynIntStack& DynIntStack::operator=( DynIntStack St){
 		StackNode* ptr=St.top;
 
 		ptr=ptr->next;
-		while (ptr!=NULL)
+		while (ptr!=nullptr)
 		{
 			copyPtr=new StackNode(ptr->value.x,ptr->value.y,ptr->value.value);
 			copyPrev->next=copyPtr;
@@ -205,8 +205,8 @@ DynIntStack& DynIntStack::operator=( DynIntStack St){
 
 bool DynIntStack::isEmpty(void) const{
 	bool status;
-	//||  (top->value.x==NULL && top->value.y==NULL)
-	if (this==NULL || top==NULL)status =true;
+	//||  (top->value.x==nullptr && top->value.y==nullptr)
+	if (this==nullptr || top==nullptr)status =true;
 	else status = false;
 	return status;
 
