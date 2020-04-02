@@ -8,7 +8,7 @@ body{
 header{
     margin: 0px;
     padding: 0px;
-    position: absolute;
+    position: fixed;
     height: 10%;
     width: 100%;
     background-color:rgba(38,38,38,0.5);
@@ -85,4 +85,30 @@ header button:hover{
     cursor: crosshair;  
     min-width: 0px;
 }
+
+.dialog{
+    display: none;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow:rgb(48, 48, 48) 0px 0px 20px, rgb(248, 248, 248) 0px 0px 10px;
+    margin: 5%;
+    width: 90%;
+    height:90%;
+    border:0px;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(35,35,35,0.4) ;
+    font-size: 50px;
+    z-index: 0;
+    position: absolute;
+    
+}
+.loading{
+    width: 20%;
+    height: auto;
+
+}
+
+.dialog div{
+margin-top: 10%;
+}
+
 

@@ -9,6 +9,44 @@ $(document).ready(function () {
         }
     }
 
+    var jsonContent;
+
+    function SubmitProject(newMaze)
+    {
+        //json send and solution received with xmlhttprequest functions.
+        var xhttp= new XMLHttpRequest();
+        xhttp.open('POST',"/jsonsave.php/",true);
+
+        xhttp.onreadystatechange= function(){
+
+            //text in wait screen
+            if(this.readyState==0){
+                $(".dialog div").text("loading.");
+            }
+            else  if(this.readyState==1){
+                $(".dialog div").text("loading..");
+            }
+            else if(this.readyState==3){
+                $(".dialog div").text("loading...");
+
+            }
+            else if(this.readyState==4){
+                $(".dialog div").html("maze sent<br> waiting for response");
+            }
+        }
+
+        xhttp.onload=function(){
+            if(this.status==200){
+                console.log(this.responseText);
+            }
+
+        }
+        //send request
+        xhttp.setRequestHeader('Content-type','application/json')
+        xhttp.send(newMaze);
+        //return the solution json 
+        //implementation function
+    }
 
     var mode = 0;
     var locked = false;
@@ -33,25 +71,34 @@ $(document).ready(function () {
         mode = 3;
         $(".child").css("cursor", "crosshair");
         id=0;
+        
+        //creating maze screen
+        $(".dialog").fadeIn("4000");
+        $(".dialog").append("<div>Your maze is in process.</div>")
+        $(".dialog").append('<img class="loading" src="loading-opaque.gif">')
+        $(".dialog").css("z-index","1");
+        $(".dialog").css("display","box");
+
+
+
         myMaze.startingX= Math.floor(pointed/100) ;
         myMaze.startingY= pointed%100 ;
-
         while(id<10000){
             if($(`#${id}`).css( "background-color" ) == "rgba(235, 235, 235, 0.8)") myMaze.ints.push(0);
             else myMaze.ints.push(1);
         id++;
         }
+ 
+        
         var jsonContent =JSON.stringify(myMaze)
-        console.log(jsonContent)
-        var fs=require("fs");
-        fs.writeFile("./sample.txt", jsonContent, (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            };
-        });
+        console.log(jsonContent);
+        
 
-    })
+        var solution = SubmitProject(jsonContent);
+        //showSolution(solution);
+      
+    }
+    )
 
     $("#lock").click(function () {
         locked = true;
@@ -87,7 +134,6 @@ $(document).ready(function () {
             if (y < h / 8) $(".burger").animate({ top: '90%' });
             else $(".burger").animate({ top: '5%' });
         }
-
     })
 
     i = 0;
