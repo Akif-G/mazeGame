@@ -14,8 +14,14 @@ $(document).ready(function () {
     function SubmitProject(newMaze)
     {
         //json send and solution received with xmlhttprequest functions.
-        var xhttp= new XMLHttpRequest();
-        xhttp.open('POST',"/jsonsave.php/",true);
+        const xhttp= new XMLHttpRequest();
+        xhttp.open("GET","./saveJSON.php");
+        console.log("1")
+        xhttp.setRequestHeader("Content-Type","application/json")
+        console.log("1")
+        //send request
+        xhttp.send(newMaze);
+        console.log("1")
 
         xhttp.onreadystatechange= function(){
 
@@ -41,16 +47,14 @@ $(document).ready(function () {
             }
 
         }
-        //send request
-        xhttp.setRequestHeader('Content-type','application/json')
-        xhttp.send(newMaze);
+
         //return the solution json 
         //implementation function
     }
 
     var mode = 0;
     var locked = false;
-    var pointed;
+    var pointed=-1;
     var myMaze=new maze();
     $("#draw").click(function () {
         mode = 0;
@@ -90,7 +94,7 @@ $(document).ready(function () {
         }
  
         
-        var jsonContent =JSON.stringify(myMaze)
+        const jsonContent =JSON.stringify(myMaze)
         console.log(jsonContent);
         
 
@@ -173,6 +177,9 @@ $(document).ready(function () {
 
     $('.child').click(function (e) {
         if (mode == 2) {
+            if(pointed!=-1){
+            $(`#${pointed}`).css(`background-color`, `#1B1E27`);
+            }
 
             let id = e.target.id;
             $(`#${id}`).css(`background-color`, `rgb(95, 214, 186)`);
