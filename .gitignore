@@ -1,8 +1,8 @@
-maze
 *.exe
 *.py
 ConsoleApplication1/
 results
+config.env
 
 # dependencies
 mazeSolver/mazesolver/node_modules
