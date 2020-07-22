@@ -1,19 +1,15 @@
-maze
-*.exe
-*.py
-ConsoleApplication1/
-results
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-mazeSolver/mazesolver/node_modules
-mazeSolver/mazesolver/.pnp
+/node_modules
+/.pnp
 .pnp.js
 
 # testing
-mazeSolver/mazesolver/coverage
+/coverage
 
 # production
-mazeSolver/mazesolver/build
+/build
 
 # misc
 .DS_Store
