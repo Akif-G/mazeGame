@@ -1,7 +1,8 @@
 *.exe
 *.py
 ConsoleApplication1/
-results
+mazeSolver/mazesolver/api/controllers/maze
+mazeSolver/mazesolver/api/controllers/results
 config.env
 
 # dependencies

@@ -2,11 +2,15 @@ const path = require('path')
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const morgan = require('morgan');
 const xssClean = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const AppError = require('./api/utils/AppError');
+const mazeRouter = require('./api/routers/mazeRouter');
+const cors = require('cors');
 
-const app = express()
+const app = express();
 
 //security &http
 app.use(helmet())
@@ -28,16 +32,19 @@ app.use(cookieParser());
 app.use(xssClean());
 
 ///////////////////////////// ROUTE //////////////////////////////////
+app.use(morgan('dev'))
+app.use(cors());
 
 //API
-app.post('/solve', (req, res, next) => { res.send('solving') });
+app.use('/solve', mazeRouter);
 
 //REACT
 app.use(express.static(path.join(__dirname, 'build')));
 
 //404
 app.all('*', (req, res, next) => {
-    res.status(404).json({ data: 'This Page is not exist.' })
+    const err = new AppError('This Page is not exist.', 404);
+    next(err);
 });
 
 module.exports = app;

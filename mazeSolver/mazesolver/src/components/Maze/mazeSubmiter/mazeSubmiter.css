@@ -1,0 +1,18 @@
+.submitButton{
+    font-family: "Open Sans";
+    border-width: 5px;
+    border-color: #323334;
+    border-style: solid;
+    border-radius: 0%;
+    color: #323334;
+    background-color: white;
+    font-weight: 600;
+    padding: 1rem;
+    transition: 0.3s;
+    font-size: large;
+}
+.submitButton:hover{
+    border-radius: 0%;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    transform: scale(1.05);
+}
