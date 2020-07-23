@@ -2,7 +2,7 @@
 *.py
 ConsoleApplication1/
 mazeSolver/mazesolver/maze
-mazeSolver/mazesolver/results
+results
 config.env
 
 # dependencies
