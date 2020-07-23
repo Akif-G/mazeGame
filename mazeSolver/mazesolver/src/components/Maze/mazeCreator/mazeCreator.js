@@ -5,31 +5,29 @@ import MazeResult from './mazeResult/mazeResult'
 
 const MazeCreator = (props) => {
 
-
     const [state, setData] = useContext(MazeContext);
 
     const Draw = (e) => {
         let newData = [...state.data];
         let newBeginning = state.beginning;
         if (state.mode === 1) {
-            e.target.style.background = '#323334';
-            newData.push(e.target.id);
-            if (state.beginning && e.target.id === state.beginning.id) {
-                newBeginning = null;
-            };
+            if (!newData.includes(e.target.id)) {
+                e.target.style.background = '#323334';
+                newData.push(e.target.id);
+                console.log("drawn")
+                if (state.beginning && e.target.id === state.beginning.id) {
+                    newBeginning = null;
+                };
+            }
         }
-        else if (state.mode === 2) {
+        if (state.mode === 2) {
             if (state.beginning && e.target.id === state.beginning.id) {
                 newBeginning = null;
+                e.target.style.background = '#efeeee';
             }
-
-            const index = newData.indexOf(e.target.id);
-            if (index > -1) {
-                newData.splice(index, 1);
-            }
+            newData = newData.filter(item => item !== e.target.id)
             e.target.style.background = '#efeeee';
         }
-
         setData({ ...state, data: newData, beginning: newBeginning })
     };
 
@@ -51,19 +49,13 @@ const MazeCreator = (props) => {
         }
     };
 
-    // useEffect(() => {
-    //     effect
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [input])
 
     return (
         <div className="MazeCreator">
             {/* <textarea className="mazeInput" value={data} onChange={(e) => {
                 setData(e.target.value)
             }} /> */}
-            {state.mode === "submit" ? <MazeResult {...state} /> : maze}
+            {state.mode === 4 ? <MazeResult /> : maze}
         </div>
     );
 }

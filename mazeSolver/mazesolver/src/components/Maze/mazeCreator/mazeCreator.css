@@ -30,3 +30,20 @@
     cursor: crosshair;  
     min-width: 1px;
 }   
+
+.previous-enter{
+    opacity: 0;
+}
+.previous-enter.previous-enter-active{
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.previous-enter{
+    opacity: 1;
+}
+
+.previous-enter{
+    opacity: 0.01;
+    opacity: 300ms ease-in;
+}

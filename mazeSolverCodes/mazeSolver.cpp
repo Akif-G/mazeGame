@@ -26,30 +26,29 @@ DynIntStack Compare (DynIntStack &Stack,DynIntStack &Stack2,int rowNumber,int Co
 	static DynIntStack Stack_temp;				//used static the prevent probable errors of deleted stacks.
 	if(Stack.top==nullptr)Stack_temp.top=nullptr;		//equals the main and static stacks.
 	else Stack_temp=Stack;
+
 	static DynIntStack Stack_temp2;
 	if(Stack2.top==nullptr)Stack_temp2.top=nullptr; 
 	else Stack_temp2=Stack2;
+
 	if (Stack.top==nullptr)return Stack2;			//one of the stacks is already empty -> return other one  
 	if (Stack2.top==nullptr)return Stack;
+
 	Stack_temp>>num;
 	Stack_temp2>>num2;
-	if (num.x!=0 && num.x!=ColumnNumber-1 && num.y!=0 && num.y!=rowNumber-1)    return Stack2; //if it s not an end, return other one.
-	if (num2.x!=0 && num2.x!=ColumnNumber-1 && num2.y!=0 && num2.y!=rowNumber-1) return Stack;
-	while((Stack_temp.top!=nullptr && Stack_temp2.top!=nullptr) && !(Stack_temp.top->value.x==0 && Stack_temp.top->value.value==0 && Stack_temp.top->value.y==0  ))
+	while(Stack_temp.top!=nullptr && Stack_temp2.top!=nullptr )
 	{//means until empty.
+		if (num.x==0 || num.x==ColumnNumber-1 || num.y==0 || num.y==rowNumber-1)    return Stack; //if it s not an end, return other one.
+		if (num2.x==0 || num2.x==ColumnNumber-1 || num2.y==0 || num2.y==rowNumber-1) return Stack2;
 		Stack_temp>>num;
 		Stack_temp2>>num;
 	}
-	if( Stack_temp.top==nullptr) return Stack;
-	else if(Stack_temp2.top==nullptr) return Stack2;
+	if( Stack_temp.top==nullptr) return Stack2;
+	else if(Stack_temp2.top==nullptr) return Stack;
 }
 
 DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int columnNumber){ //these function is main maze solver, every parting of the ways seems like new maze and recursion happens.
-	MAINCOUNTER++;
-	cout<<MAINCOUNTER;
-	if(MAINCOUNTER%1420==0)
-		cout<<"debug";
-	DynIntStack Stack;  //generates new satck to watch the new maze , every road is a new one.
+	DynIntStack Stack;  //generates new stack to watch the new maze , every road is a new one.
 	int count=1;  
 
 	while(count!=0){
@@ -95,7 +94,6 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 		{
 			DynIntStack Stackup,Stackdown,Stackrigth,Stackleft,StR_temp,StD_temp,StU_temp,StL_temp;
 
-
 			Stack<<Array[row][column];//step is taken in a stack just once.
 			//try every road and decide which one is shortest?
 			if(up)
@@ -104,13 +102,15 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 				int row_temp=row-1; //can't change row or column use a new one to describe the new maze's beginning point
 				DynIntStack StU_temp=MazeRunner(Array, row_temp, column, rowNumber, columnNumber); //act like you are in a new way.
 				Stackup=StU_temp; //unnecessary but decrease the risks.
+				StU_temp.~DynIntStack();
 			}
-			if(down)//same us up, and others
+			if(down)//same as up, and others
 			{
 				Array[row][column].value=1;
 				int row_temp=row+1;
 				DynIntStack StD_temp=MazeRunner(Array, row_temp, column, rowNumber, columnNumber);
 				Stackdown=StD_temp;
+				StD_temp.~DynIntStack();
 			}
 			if(left)
 			{
@@ -118,6 +118,7 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 				int column_temp=column-1;
 				DynIntStack StL_temp=MazeRunner(Array, row, column_temp, rowNumber, columnNumber);
 				Stackleft= StL_temp;
+				StL_temp.~DynIntStack();
 			}
 			if(right)
 			{
@@ -125,26 +126,34 @@ DynIntStack & MazeRunner(Point** Array,int row,int column,int rowNumber,int colu
 				int column_temp=column+1;
 				DynIntStack StR_temp=MazeRunner(Array, row, column_temp, rowNumber, columnNumber);
 				Stackrigth= StR_temp;
+				StR_temp.~DynIntStack();
+
 			}
 			//which one is shortest?
 			DynIntStack Stack1,Stack2;
 
-			if (Stackdown.top!=nullptr ||Stackup.top!=nullptr) Stack1=Compare(Stackdown,Stackup,rowNumber,columnNumber); //dont get in to "compare" if both of them are empty.
+			if (Stackdown.top!=nullptr || Stackup.top!=nullptr) Stack1=Compare(Stackdown,Stackup,rowNumber,columnNumber); //dont get in to "compare" if both of them are empty.
 			else Stack1.top=nullptr;															//-- andjust say result = empty.
 			/**************************************/
 			if (Stackrigth.top!=nullptr ||Stackleft.top!=nullptr) Stack2=	Compare(Stackleft,Stackrigth,rowNumber,columnNumber);
 			else Stack2.top=nullptr;
 			/*************************************/
-			DynIntStack Stack3= Compare(Stack1,Stack2,rowNumber,columnNumber); //stack3=shortest of the roads
+			DynIntStack Stack3= Compare(Stack1,Stack2,rowNumber,columnNumber);//stack3=shortest of the roads
+			Stack1.~DynIntStack();
+			Stack2.~DynIntStack();
+			Stackup.~DynIntStack();
+			Stackdown.~DynIntStack();
+			Stackrigth.~DynIntStack();
+			Stackleft.~DynIntStack();
+			StR_temp.~DynIntStack();
+			StD_temp.~DynIntStack();
+			StU_temp.~DynIntStack();
+			StL_temp.~DynIntStack();
 			Point num;
 			Stack+=Stack3; //shortest way included to stack.
 			static DynIntStack* Stack_temp;		//used statics for preventing probable unintended deletions.
 			Stack_temp=new DynIntStack(Stack);
 			return *Stack_temp;
-		}
-
-		else {
-			Stack<<Array[row][column]; 
 		}
 	}
 	static DynIntStack* Stack_temp;
@@ -229,6 +238,8 @@ int main(){
 		//prints the result stack which is shortest solution
 		result<<Result;
 	}
-	delete2Darray(twoDarray,row,column); //deletes created two d. array.
+	delete2Darray(twoDarray,row,column);
+	Stack.~DynIntStack();//deletes created two d. array.
+	Result.~DynIntStack();//deletes created two d. array.
 	return 0;
 }
