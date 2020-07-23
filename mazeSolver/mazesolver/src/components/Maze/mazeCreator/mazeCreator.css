@@ -4,3 +4,29 @@
     width:500px;
     height: 500px;
 }
+
+.MazeCreator{
+    margin: 17vh 5% 0 5%;
+    background-color:#efeeee;
+    width: 90%;
+    height: 70vh;
+    border:0px;
+    box-shadow:rgb(48, 48, 48) 0px 0px 5px, rgb(248, 248, 248) 0px 0px 10px;
+    flex-wrap: wrap;
+    position: absolute;
+    cursor : crosshair;
+    display: flex;  
+}
+.element{
+    border:none;
+    margin:0px;
+    padding: 0px;
+    background-color: #efeeee;
+    width: 2.5%;
+    float: none;
+    height: 2.5%;
+    font-size: 70%;
+    position: relative;
+    cursor: crosshair;  
+    min-width: 1px;
+}   

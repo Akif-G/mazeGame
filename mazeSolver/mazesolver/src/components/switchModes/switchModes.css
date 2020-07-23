@@ -1,0 +1,53 @@
+.switchContainer {
+    position: fixed;
+    display: flex;
+    top:0;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: space-between;
+    padding: 15px 15px 15px 2px;    
+}
+
+.switchContainer div{
+    font-size: 100%;
+    margin: 10px;
+    padding: 30px;
+}
+
+.switchContainer,
+.switchContainer div {
+    transition: 0.2s;
+    border-radius: 10px;
+    box-shadow: -6px -6px 16px #fff,
+                6px 6px 16px #d1cdc7;
+}
+
+.switchContainer div:active {
+    transform: scale(0.9);
+    transition: 0.2s;
+    box-shadow:  6px 6px 16px #fff,
+                 6px 6px 6px #5dbcd2;
+}
+
+.draw {
+    background-image: url('./edit.png');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */}
+
+.beginPoint {
+        background-image: url('./pin.png');
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */;
+    }
+.delete{
+        background-image: url('./clean.png');
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+    }
+
+.contrasted{
+    filter: contrast(12);
+}
