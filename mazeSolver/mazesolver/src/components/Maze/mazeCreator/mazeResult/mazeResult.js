@@ -12,10 +12,10 @@ const MazeResult = () => {
         for (let j = 0; j < 40; j++) {
             for (let i = 0; i < 40; i++) {
                 if (data.data.includes('' + (j * 40 + i))) {
-                    newMaze.push(<div className="element" key={i + 40 * j} id={i + 40 * j} >0</div>)
+                    newMaze.push(<div className="element" key={i + 40 * j} id={i + 40 * j} style={{ backgroundColor: "#323334", color: "#efe" }} ></div>)
                 }
                 else {
-                    newMaze.push(<div className="element" key={i + 40 * j} id={i + 40 * j} style={{ color: "#5dbcd2" }}>1</div>)
+                    newMaze.push(<div className="element" key={i + 40 * j} id={i + 40 * j} style={{ color: "#5dbcd2" }}></div>)
                 }
             }
         }
@@ -30,7 +30,7 @@ const MazeResult = () => {
             for (const id of data.response) {
                 a++;
                 setTimeout(() => {
-                    newMaze[id] = < div className="element" key={id} style={{ backgroundColor: "#5dbcd2" }}> 0</div >
+                    newMaze[id] = < div className="element" key={id} style={{ backgroundColor: "#5dbcd2" }}></div >
                     setState({ ...state, maze: newMaze })
                 }, 10 * a)
             }

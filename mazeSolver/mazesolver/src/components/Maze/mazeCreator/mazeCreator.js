@@ -50,6 +50,7 @@ const MazeCreator = (props) => {
     };
 
 
+
     return (
         <div className="MazeCreator">
             {/* <textarea className="mazeInput" value={data} onChange={(e) => {
