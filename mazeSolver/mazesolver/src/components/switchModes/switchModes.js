@@ -26,12 +26,13 @@ const SwitchModes = (props) => {
                 <div className={"beginPoint".concat(state.mode === 3 ? " contrasted" : "")} onClick={() => clickHandler(3)}></div>
                 {/* mode4=submit */}
             </div>
-            <div id="imageChoose" >
+            {/* this part is implemented for file processing methods but it doesnt like a good idea for rn. */}
+            {/* <div id="imageChoose" >
                 <label for="file-upload" class="custom-file-upload">
                 </label>
                 <input id="file-upload" type="file" name="myFile" onChange={fileHandler} />
 
-            </div>
+            </div> */}
         </div>
     );
 }
