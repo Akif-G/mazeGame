@@ -10,8 +10,8 @@ function App() {
   return (
     <MazeContext.Provider value={[data, setData]}>
       <div className="App">
-        <Maze />
         <SwitchModes />
+        <Maze />
       </div>
     </MazeContext.Provider>
   );

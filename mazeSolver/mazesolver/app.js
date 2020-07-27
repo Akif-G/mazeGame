@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const AppError = require('./api/utils/AppError');
 const mazeRouter = require('./api/routers/mazeRouter');
+const converterRouter = require('./api/routers/converterRouter');
 const cors = require('cors');
 
 const app = express();
@@ -37,6 +38,7 @@ app.use(cors());
 
 //API
 app.use('/solve', mazeRouter);
+app.use('/pixeltobinary', converterRouter)
 
 //REACT
 app.use(express.static(path.join(__dirname, 'build')));

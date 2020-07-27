@@ -1,21 +1,22 @@
 .mazeInput{
-    margin: 1rem;
-    resize: both;
+    margin: 0;
     width:500px;
     height: 500px;
 }
 
 .MazeCreator{
-    margin: 17vh 5% 0 5%;
+    margin:3vh 5%;
     background-color:#efeeee;
     width: 90%;
     height: 70vh;
     border:0px;
     box-shadow:rgb(48, 48, 48) 0px 0px 5px, rgb(248, 248, 248) 0px 0px 10px;
     flex-wrap: wrap;
-    position: absolute;
     cursor : crosshair;
-    display: flex;  
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center; 
 }
 .element{
     border:none;

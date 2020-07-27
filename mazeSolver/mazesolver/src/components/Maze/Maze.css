@@ -1,0 +1,7 @@
+.Maze{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center; 
+}

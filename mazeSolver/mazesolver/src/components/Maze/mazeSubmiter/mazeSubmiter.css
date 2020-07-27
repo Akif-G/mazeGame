@@ -1,20 +1,17 @@
 .mazeSubmit{
     display: flex;
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
     
 }
 .submitButton{
-    position: fixed;
-    bottom:1.5%;
     width: 20rem;
     max-width: 90%;
     font-family: "Open Sans";
     border-width: 5px;
-    border-color: #323334;
+    border-color: #5dbcd2;
     border-style: solid;
     border-radius: 0%;
-    color: #323334;
     background-color: white;
     font-weight: 600;
     transition: 0.3s;
@@ -39,18 +36,17 @@
 .miniArea{
     font-weight: 600;
     padding: 1rem;
+    color: #5dbcd2;
     border:none;
     background-color: rgba(0, 0, 0,0);
-    color: whitesmoke;
-    text-shadow:2px 2px rgb(165, 164, 164),
-            -2px -2px rgb(32, 31, 31);
+    text-shadow:-2px -2px rgb(240, 240, 240),
+            2px 2px #323334;
     margin:0;
     padding: 0;
     width: 20rem;
     height: 100%;
     max-width: 100%;
     font-size: 200%;
-    backdrop-filter: blur(1px);
-    backdrop-filter: invert();
-}
+    backdrop-filter: invert(0);
+    }
 
