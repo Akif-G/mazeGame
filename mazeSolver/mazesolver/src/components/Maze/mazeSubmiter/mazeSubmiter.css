@@ -5,48 +5,40 @@
     
 }
 .submitButton{
-    width: 20rem;
-    max-width: 90%;
-    font-family: "Open Sans";
-    border-width: 5px;
-    border-color: #5dbcd2;
-    border-style: solid;
-    border-radius: 0%;
-    background-color: white;
-    font-weight: 600;
-    transition: 0.3s;
-    font-size: x-large;
-    background-image: url('./pngwave.png');
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
+        font-family: Arial;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+        box-sizing: content-box;
+        background-image: url('./pngwave.png');
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */;
+        color: #ffffff;
+        text-shadow:2px 2px rgb(108, 108, 108);
+        font-weight: 700;
+        font-size: 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 25px;
+        border-radius: 30px;
+        outline: 0!important;
+        border: 0;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        box-shadow: 2px 2px 5px #33333382;
+        z-index: 2;   
+        backdrop-filter: invert();
 }
-.submitButton:hover{
-    border-radius: 0%;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    transform: scale(1.05);
+
+.submitButton:hover
+{
+    transform: scale(1.1);
+    transition: 0.2s;
 }
 
 .submitButton:active{
-    border-radius: 0%;
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
-    transform: scale(0.90);
+    transform: scale(0.9);
+    transition: 0.2s;
 }
-
-.miniArea{
-    font-weight: 600;
-    padding: 1rem;
-    color: #5dbcd2;
-    border:none;
-    background-color: rgba(0, 0, 0,0);
-    text-shadow:-2px -2px rgb(240, 240, 240),
-            2px 2px #323334;
-    margin:0;
-    padding: 0;
-    width: 20rem;
-    height: 100%;
-    max-width: 100%;
-    font-size: 200%;
-    backdrop-filter: invert(0);
-    }
 

@@ -64,7 +64,7 @@ const MazeSubmiter = (props) => {
     return (
         <div className="mazeSubmit">
             <div className="submitButton" onClick={submitHandle}>
-                <button className="miniArea" >Submit</button>
+                Submit
             </div>
         </div>
     );
