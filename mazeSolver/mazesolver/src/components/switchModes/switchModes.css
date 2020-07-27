@@ -1,6 +1,13 @@
+.Options{
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .switchContainer {
     display: flex;
-    top:0;
     justify-content: space-between;
     padding: 15px 15px 15px 15px;    
 }
@@ -48,3 +55,54 @@
 .contrasted{
     filter: contrast(12);
 }
+
+
+/*File Button*/
+input[type="file"] {
+    height: 0px;
+    width: 0px;
+    }
+    
+    #imageChoose {
+        margin: 0 5vh ;
+    }
+
+    #imageChoose label{
+        max-width: 4vh;
+        content: url('./upload.png');
+        font-family: Arial;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+        box-sizing: content-box;
+        color: #fff;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px;
+        border-radius: 50%;
+        border-radius: 30px;
+        outline: 0!important;
+        border: 0;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        background: #fcb045;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #5dbdd2d7, #58b9e9);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #5dbdd2d7   , #58b9e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        box-shadow: 2px 2px 5px #25545fd7;
+        
+    }
+    #imageChoose label:hover,
+    #ConvertButton:hover
+    {
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
+    
+    #imageChoose label:active,
+    #ConvertButton:active{
+        transform: scale(0.9);
+        transition: 0.2s;
+    }
+    

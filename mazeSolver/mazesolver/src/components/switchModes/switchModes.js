@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { MazeContext } from '../../contexts/mazeContext';
 import './switchModes.css';
 
@@ -13,12 +13,25 @@ const SwitchModes = (props) => {
         setData({ ...newData, mode: newMode })
     }
 
+    const fileHandler = (e) => {
+
+    }
+
+
     return (
-        <div className="switchContainer">
-            <div className={"draw".concat(state.mode === 1 ? " contrasted" : "")} onClick={() => clickHandler(1)}></div>
-            <div className={"delete".concat(state.mode === 2 ? " contrasted" : "")} onClick={() => clickHandler(2)}></div>
-            <div className={"beginPoint".concat(state.mode === 3 ? " contrasted" : "")} onClick={() => clickHandler(3)}></div>
-            {/* mode4=submit */}
+        <div className="Options">
+            <div className="switchContainer">
+                <div className={"draw".concat(state.mode === 1 ? " contrasted" : "")} onClick={() => clickHandler(1)}></div>
+                <div className={"delete".concat(state.mode === 2 ? " contrasted" : "")} onClick={() => clickHandler(2)}></div>
+                <div className={"beginPoint".concat(state.mode === 3 ? " contrasted" : "")} onClick={() => clickHandler(3)}></div>
+                {/* mode4=submit */}
+            </div>
+            <div id="imageChoose" >
+                <label for="file-upload" class="custom-file-upload">
+                </label>
+                <input id="file-upload" type="file" name="myFile" onChange={fileHandler} />
+
+            </div>
         </div>
     );
 }
